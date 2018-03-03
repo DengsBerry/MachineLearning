@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import tensorflow as tf
 from numpy.random import RandomState
 
@@ -30,7 +31,7 @@ Y = [[int(x1+x2<1)] for (x1,x2) in X]
 # 创建一个会话来运行TensorFlow程序
 with tf.Session() as sess:
     # 初始化变量
-    init_op = tf.global_variables_initializer()
+    init_op = tf.initialize_all_variables()
     sess.run(init_op)
     
     print(sess.run(w1))

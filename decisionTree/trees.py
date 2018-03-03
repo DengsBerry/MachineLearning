@@ -29,6 +29,7 @@ def calcShannonEnt(dataSet):
         shannonEnt -= prob * log(prob,2) #log base 2
     return shannonEnt
     
+
 def splitDataSet(dataSet, axis, value):
     retDataSet = []
     for featVec in dataSet:
@@ -80,16 +81,16 @@ def createTree(dataSet,labels):
         subLabels = labels[:]       #copy all of labels, so trees don't mess up existing labels
         myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value),subLabels)
     return myTree                            
-    
+
+
 def classify(inputTree,featLabels,testVec):
     firstStr = inputTree.keys()[0]
     secondDict = inputTree[firstStr]
     featIndex = featLabels.index(firstStr)
-    key = testVec[featIndex]
-    valueOfFeat = secondDict[key]
-    if isinstance(valueOfFeat, dict): 
-        classLabel = classify(valueOfFeat, featLabels, testVec)
-    else: classLabel = valueOfFeat
+    for key in secondDict.keys():
+        if testVec[featIndex] == key: 
+            classLabel = classify(secondDict[key], featLabels, testVec)
+        else: classLabel = secondDict[key]
     return classLabel
 
 def storeTree(inputTree,filename):
@@ -103,3 +104,4 @@ def grabTree(filename):
     fr = open(filename)
     return pickle.load(fr)
     
+

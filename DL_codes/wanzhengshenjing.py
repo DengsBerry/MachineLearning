@@ -11,15 +11,18 @@ w2 = tf.Variable(tf.random_normal([3,1],stddev=1,seed=1))
 
 # 在shape的一个维度上使用None可以方便使用不同的batch大小
 x = tf.placeholder(tf.float32,shape=(None,2),name='x-input')
-y_ = tf.placeholder(tf.float32,shape=(None,1),name='y-input')
+y_ = tf.placeholder(tf.float32,shape=(None,1),name='y-input') # y_表示正确结果
 
 # 定义神经网络前向传播的过程
 a = tf.matmul(x,w1)
-y = tf.matmul(a,w2)
+y = tf.matmul(a,w2)     # y表示预测结果
 
 # 定义损失函数和反响传播算法
 cross_entropy = -tf.reduce_mean(y_ * tf.log(tf.clip_by_value(y,1e-10,1.0)))
+
+# 反向算法可以对集合中的变量进行优化
 train_step = tf.train.AdamOptimizer(0.001).minimize(cross_entropy)
+
 
 # 通过随机数生成一个模拟数据集
 rdm = RandomState(1)

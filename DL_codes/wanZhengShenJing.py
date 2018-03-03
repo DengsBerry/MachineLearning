@@ -20,7 +20,7 @@ y = tf.matmul(a,w2)     # y表示预测结果
 # 定义损失函数和反响传播算法
 cross_entropy = -tf.reduce_mean(y_ * tf.log(tf.clip_by_value(y,1e-10,1.0)))
 
-# 反向算法可以对集合中的变量进行优化
+# 反向算法可以对集合中的变量进行优化  0.001weixuexilv
 train_step = tf.train.AdamOptimizer(0.001).minimize(cross_entropy)
 
 

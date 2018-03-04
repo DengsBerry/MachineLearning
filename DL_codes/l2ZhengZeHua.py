@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import tensorflow as tf
 #获取一层神经网络边上的权重，并将这个权重的L2正则化损失加入名称为‘losses‘的集合中
 def get_weight(shape,lambda1):
@@ -5,7 +6,7 @@ def get_weight(shape,lambda1):
     var = tf.Variable(tf.random_normal(shape),dtype=tf.float32)
     #add_to_collection函数将这个新生成变量的L2正则化损失项加入集合
     #这个函数的第一个参数‘losses‘是集合的名字，第二个参数是要加入这个集合的内容
-    tf.add_to_collection(‘losses‘,tf.contrib.layers.l2_regularizer(lambda1)(var))
+    tf.add_to_collection('losses',tf.contrib.layers.l2_regularizer(lambda1)(var))
     #返回生成的变量
     return var
 
@@ -38,8 +39,8 @@ for i in range(1,n_layers):
 mse_loss=tf.reduce_mean(tf.square(y_-cur_layer))
 
 #将均方误差损伤函数加入损伤集合
-tf.add_to_collection(‘losses‘,mse_loss)
+tf.add_to_collection('losses',mse_loss)
 
 #get_collection返回一个列表，这个列表是所有这个集合中的元素。在这个样例中
 #这些元素就是损失函数的不同部分，将它们加起来就可以得到最终的损失函数
-loss=tf.add_n(tf.get_collection(‘losses‘))
+loss=tf.add_n(tf.get_collection('losses'))

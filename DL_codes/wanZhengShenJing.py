@@ -10,6 +10,7 @@ w1 = tf.Variable(tf.random_normal([2,3],stddev=1,seed=1))
 w2 = tf.Variable(tf.random_normal([3,1],stddev=1,seed=1))
 
 # 在shape的一个维度上使用None可以方便使用不同的batch大小
+# 定义一个位置用来输入数据，数据类型需要指定 
 x = tf.placeholder(tf.float32,shape=(None,2),name='x-input')
 y_ = tf.placeholder(tf.float32,shape=(None,1),name='y-input') # y_表示正确结果
 

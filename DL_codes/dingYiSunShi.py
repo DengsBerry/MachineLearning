@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import tensorflow as tf  
 from numpy.random import RandomState  
   
@@ -10,7 +11,9 @@ y = tf.matmul(x, w1)
 # 定义损失函数使得预测少了的损失大，于是模型应该偏向多的方向预测。  
 loss_less = 10  
 loss_more = 1  
-loss = tf.reduce_sum(tf.where(tf.greater(y, y_), (y - y_) * loss_more, (y_ - y) * loss_less))  
+
+#y_是实际值，y是预测结果
+loss = tf.reduce_sum(tf.select(tf.greater(y, y_), (y - y_) * loss_more, (y_ - y) * loss_less))  
 train_step = tf.train.AdamOptimizer(0.001).minimize(loss)  
   
 rdm = RandomState(1)  
@@ -18,7 +21,7 @@ X = rdm.rand(128,2)
 Y = [[x1+x2+(rdm.rand()/10.0-0.05)] for (x1, x2) in X]  
   
 with tf.Session() as sess:  
-    init_op = tf.global_variables_initializer()  
+    init_op = tf.initialize_all_variables()  
     sess.run(init_op)  
     STEPS = 5000  
     for i in range(STEPS):  

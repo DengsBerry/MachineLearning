@@ -3,6 +3,7 @@ import tensorflow as tf
 from numpy.random import RandomState
 
 # 定义训练数据batch的大小
+# 一次性获得N个样例的结果
 batch_size = 8
 
 # 定义神经网络的参数

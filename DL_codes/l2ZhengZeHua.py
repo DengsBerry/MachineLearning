@@ -29,7 +29,8 @@ for i in range(1,n_layers):
     #生成当前层中权重的变量，并将这个变量的L2正则化损失加入计算图上的集合
     weight=get_weight([in_dimension,out_dimension],0.001)
     bias=tf.Variable(tf.constant(0.1,shape=[out_dimension]))
-    #使用ReLU激活函数
+    #使用ReLU激活函数，变成非线性，加上偏置项
+	#之后cur_layer成为新的一层神经网络
     cur_layer=tf.nn.relu(tf.matmul(cur_layer,weight)+bias)
     #进入下一层之前将下一层的节点个数更新为当前层节点个数
     in_dimension=layer_dimension[i]

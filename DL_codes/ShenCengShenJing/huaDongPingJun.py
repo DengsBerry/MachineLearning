@@ -18,7 +18,7 @@ sess.run(tf.assign(v1, 5))
     # 更新v1的滑动平均值。衰减率为min{0.99,(1+step)/(10+step)= 0.1}=0.1,
     # 所以v1的滑动平均会被更新为0.10+0.95=4.5。
 sess.run(maintain_averages_op)
-    print sess.run([v1, ema.average(v1)])        #  输出[5.0, 4.5]
+    print sess.run([v1, ema.average(v1)])        # 输出[5.0, 4.5]
     
 
     # 更新step的值为10000。

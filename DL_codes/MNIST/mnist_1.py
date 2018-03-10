@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
@@ -15,7 +16,7 @@ TRAINING_STEPS = 30000                  # 训练轮数
 MOVING_AVERAGE_DECAY = 0.99             # 滑动平均衰减率
 
 # 一个辅助函数，给定神经网络的输入和所有参数，计算神经网络的前向传播结果。在这里定义了一个使用 ReLU 激活函数的三层全连接神经网络。
-# 通过加入隐藏层实现了多层网络结构， 通过 ReLU 激活函数实现了去线性化。在这个函数中也支持传入用于计算参数平均值得类，这样方便在
+# 通过加入隐藏层实现了多层网络结构， 通过 ReLU 激活函数(整流函数)实现了去线性化。在这个函数中也支持传入用于计算参数平均值得类，这样方便在
 # 测试时使用滑动平均模型。
 def inference(input_tensor, avg_class, weights1, biases1, weights2, biases2):
     # 当没有提供滑动平均类时，直接使用参数当前的取值
